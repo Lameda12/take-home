@@ -1,0 +1,55 @@
+2026-09-30T03:40:12Z
+[soup_memlog] DEVIATION: TRL DPOConfig.gradient_checkpointing forced False
+2026-09-30 03:40:17.615936: I tensorflow/core/platform/cpu_feature_guard.cc:210] This TensorFlow binary is optimized to use available CPU instructions in performance-critical operations.
+To enable the following instructions: AVX2 AVX512F FMA, in other operations, rebuild TensorFlow with the appropriate compiler flags.
+Loading config from configs/swapped.yaml...
+╭─────────────────────────────── Training Setup ───────────────────────────────╮
+│ Device:  Tesla T4                                                            │
+│ Memory:  14.6 GB                                                             │
+│ Model:   Qwen/Qwen2.5-1.5B-Instruct                                          │
+│ Task:    dpo                                                                 │
+│ Backend: transformers                                                        │
+│ LoRA:    r=16, alpha=32                                                      │
+│ Quant:   none                                                                │
+╰──────────────────────────────────────────────────────────────────────────────╯
+Loading dataset...
+Loaded: 450 train samples
+Run ID: run_20260930_034028_23a9f468
+Setting up model + trainer...
+Loading tokenizer: Qwen/Qwen2.5-1.5B-Instruct
+Fetching 6 files:   0%|          | 0/6 [00:00<?, ?it/s]Fetching 6 files: 100%|██████████| 6/6 [00:00<00:00, 1255.90it/s]
+Preparing layer shards -> /root/.soup/layer-stream/Qwen__Qwen2.5-1.5B-Instruct
+╭───────────────────────── soup train --stream-layers ─────────────────────────╮
+│ Layer streaming BETA — arch qwen2, tier ram                                  │
+│   base store   2.62 GB across 28 layers (pinned)                             │
+│   VRAM buffers 2 x 94 MB = 187 MB                                            │
+│   resident     467 MB embeddings + adapters                                  │
+│   peak VRAM    ~9.95 GB at batch 2 x seq 1024 (4 rows — chosen+rejected are  │
+│ one concatenated tensor) (logits 8.71 GB)                                    │
+│   free VRAM    15.53 GB                                                      │
+│   forecast     130-192 tok/s — a compute-bound bound, not a promise          │
+│                (from 1.78 TFLOPS measured on this card now @ 1005 MHz)       │
+│   ! accumulating 4x at batch 2: the base is re-read once per micro-batch.    │
+│ Per token that is free, but reaching effective batch 8 by raising            │
+│ training.batch_size instead measured ~2.5x faster. Accumulation holds peak   │
+│ VRAM flat, so raise batch_size while the budget above allows, then           │
+│ accumulate for the rest.                                                     │
+╰──────────────────────────────────────────────────────────────────────────────╯
+Layer streaming is BETA: slower than resident training, but this model may not 
+run resident on this card at all.
+expandable_segments allocator hint is unavailable on this platform (silently 
+ignored on Windows) — not enabled
+Layer streaming ready: 28 layers, 2.62 GB pinned RAM store, 2 x 94 MB VRAM 
+buffers
+LoRA applied: 2,179,072 trainable / 1,543,714,304 total (0.14%)
+Extracting prompt in train dataset:   0%|          | 0/450 [00:00<?, ? examples/s]Extracting prompt in train dataset:  78%|███████▊  | 350/450 [00:00<00:00, 3416.24 examples/s]Extracting prompt in train dataset: 100%|██████████| 450/450 [00:00<00:00, 3175.42 examples/s]
+Applying chat template to train dataset:   0%|          | 0/450 [00:00<?, ? examples/s]Applying chat template to train dataset:  36%|███▌      | 163/450 [00:00<00:00, 1600.56 examples/s]Applying chat template to train dataset:  74%|███████▍  | 335/450 [00:00<00:00, 1663.63 examples/s]Applying chat template to train dataset: 100%|██████████| 450/450 [00:00<00:00, 1352.77 examples/s]
+Tokenizing train dataset:   0%|          | 0/450 [00:00<?, ? examples/s]Tokenizing train dataset:   3%|▎         | 12/450 [00:00<00:03, 113.21 examples/s]Tokenizing train dataset:   9%|▉         | 42/450 [00:00<00:01, 214.70 examples/s]Tokenizing train dataset:  16%|█▌        | 71/450 [00:00<00:01, 244.24 examples/s]Tokenizing train dataset:  22%|██▏       | 99/450 [00:00<00:01, 207.58 examples/s]Tokenizing train dataset:  29%|██▉       | 130/450 [00:00<00:01, 204.14 examples/s]Tokenizing train dataset:  34%|███▍      | 154/450 [00:00<00:01, 211.12 examples/s]Tokenizing train dataset:  41%|████      | 183/450 [00:00<00:01, 201.41 examples/s]Tokenizing train dataset:  47%|████▋     | 212/450 [00:01<00:01, 193.80 examples/s]Tokenizing train dataset:  52%|█████▏    | 232/450 [00:01<00:01, 194.90 examples/s]Tokenizing train dataset:  57%|█████▋    | 258/450 [00:01<00:01, 183.05 examples/s]Tokenizing train dataset:  62%|██████▏   | 277/450 [00:01<00:00, 181.44 examples/s]Tokenizing train dataset:  68%|██████▊   | 304/450 [00:01<00:00, 178.49 examples/s]Tokenizing train dataset:  73%|███████▎  | 330/450 [00:01<00:00, 173.70 examples/s]Tokenizing train dataset:  78%|███████▊  | 352/450 [00:01<00:00, 181.04 examples/s]Tokenizing train dataset:  84%|████████▍ | 379/450 [00:02<00:00, 178.34 examples/s]Tokenizing train dataset:  90%|█████████ | 405/450 [00:02<00:00, 173.66 examples/s]Tokenizing train dataset:  95%|█████████▍| 426/450 [00:02<00:00, 178.84 examples/s]Tokenizing train dataset: 100%|██████████| 450/450 [00:02<00:00, 176.06 examples/s]Tokenizing train dataset: 100%|██████████| 450/450 [00:02<00:00, 186.42 examples/s]
+Extracting prompt in eval dataset:   0%|          | 0/50 [00:00<?, ? examples/s]Extracting prompt in eval dataset: 100%|██████████| 50/50 [00:00<00:00, 2638.96 examples/s]
+Applying chat template to eval dataset:   0%|          | 0/50 [00:00<?, ? examples/s]Applying chat template to eval dataset: 100%|██████████| 50/50 [00:00<00:00, 967.70 examples/s]
+Tokenizing eval dataset:   0%|          | 0/50 [00:00<?, ? examples/s]Tokenizing eval dataset:  42%|████▏     | 21/50 [00:00<00:00, 180.86 examples/s]Tokenizing eval dataset:  92%|█████████▏| 46/50 [00:00<00:00, 164.66 examples/s]Tokenizing eval dataset: 100%|██████████| 50/50 [00:00<00:00, 167.36 examples/s]
+The model is already on multiple devices. Skipping the move to device specified in `args`.
+Training started!
+
+The tokenizer has new PAD/BOS/EOS tokens that differ from the model config and generation config. The model config and generation config were aligned accordingly, being updated with the tokenizer's values. Updated tokens: {'bos_token_id': None, 'pad_token_id': 151643}.
+  0%|          | 0/57 [00:00<?, ?it/s]  2%|▏         | 1/57 [01:27<1:21:39, 87.49s/it]                                                  2%|▏         | 1/57 [01:27<1:21:39, 87.49s/it]

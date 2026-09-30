@@ -1,0 +1,250 @@
+2026-09-29T03:15:08Z
+2026-09-29 03:15:14.220750: I tensorflow/core/platform/cpu_feature_guard.cc:210] This TensorFlow binary is optimized to use available CPU instructions in performance-critical operations.
+To enable the following instructions: AVX2 AVX512F FMA, in other operations, rebuild TensorFlow with the appropriate compiler flags.
+Loading config from configs/lr0.yaml...
+╭─────────────────────────────── Training Setup ───────────────────────────────╮
+│ Device:  Tesla T4                                                            │
+│ Memory:  14.6 GB                                                             │
+│ Model:   Qwen/Qwen2.5-1.5B-Instruct                                          │
+│ Task:    dpo                                                                 │
+│ Backend: transformers                                                        │
+│ LoRA:    r=16, alpha=32                                                      │
+│ Quant:   none                                                                │
+╰──────────────────────────────────────────────────────────────────────────────╯
+Loading dataset...
+Loaded: 450 train samples
+Run ID: run_20260929_031522_d6ef7053
+Setting up model + trainer...
+Loading tokenizer: Qwen/Qwen2.5-1.5B-Instruct
+Fetching 6 files:   0%|          | 0/6 [00:00<?, ?it/s]Fetching 6 files: 100%|██████████| 6/6 [00:00<00:00, 1511.64it/s]
+Preparing layer shards -> /root/.soup/layer-stream/Qwen__Qwen2.5-1.5B-Instruct
+╭───────────────────────── soup train --stream-layers ─────────────────────────╮
+│ Layer streaming BETA — arch qwen2, tier ram                                  │
+│   base store   2.62 GB across 28 layers (pinned)                             │
+│   VRAM buffers 2 x 94 MB = 187 MB                                            │
+│   resident     467 MB embeddings + adapters                                  │
+│   peak VRAM    ~9.95 GB at batch 2 x seq 1024 (4 rows — chosen+rejected are  │
+│ one concatenated tensor) (logits 8.71 GB)                                    │
+│   free VRAM    15.53 GB                                                      │
+│   forecast     171-252 tok/s — a compute-bound bound, not a promise          │
+│                (from 2.33 TFLOPS measured on this card now @ 1200 MHz)       │
+│   ! accumulating 4x at batch 2: the base is re-read once per micro-batch.    │
+│ Per token that is free, but reaching effective batch 8 by raising            │
+│ training.batch_size instead measured ~2.5x faster. Accumulation holds peak   │
+│ VRAM flat, so raise batch_size while the budget above allows, then           │
+│ accumulate for the rest.                                                     │
+╰──────────────────────────────────────────────────────────────────────────────╯
+Layer streaming is BETA: slower than resident training, but this model may not 
+run resident on this card at all.
+expandable_segments allocator hint is unavailable on this platform (silently 
+ignored on Windows) — not enabled
+Layer streaming ready: 28 layers, 2.62 GB pinned RAM store, 2 x 94 MB VRAM 
+buffers
+LoRA applied: 2,179,072 trainable / 1,543,714,304 total (0.14%)
+Extracting prompt in train dataset:   0%|          | 0/450 [00:00<?, ? examples/s]Extracting prompt in train dataset:  52%|█████▏    | 233/450 [00:00<00:00, 2297.26 examples/s]Extracting prompt in train dataset: 100%|██████████| 450/450 [00:00<00:00, 2624.55 examples/s]
+Applying chat template to train dataset:   0%|          | 0/450 [00:00<?, ? examples/s]Applying chat template to train dataset:  22%|██▏       | 99/450 [00:00<00:00, 964.41 examples/s]Applying chat template to train dataset:  50%|█████     | 225/450 [00:00<00:00, 1134.83 examples/s]Applying chat template to train dataset:  80%|████████  | 360/450 [00:00<00:00, 1226.96 examples/s]Applying chat template to train dataset: 100%|██████████| 450/450 [00:00<00:00, 1190.63 examples/s]
+Tokenizing train dataset:   0%|          | 0/450 [00:00<?, ? examples/s]Tokenizing train dataset:   4%|▍         | 17/450 [00:00<00:02, 159.32 examples/s]Tokenizing train dataset:   8%|▊         | 36/450 [00:00<00:02, 174.01 examples/s]Tokenizing train dataset:  12%|█▏        | 56/450 [00:00<00:02, 179.66 examples/s]Tokenizing train dataset:  17%|█▋        | 77/450 [00:00<00:01, 187.16 examples/s]Tokenizing train dataset:  23%|██▎       | 104/450 [00:00<00:01, 182.20 examples/s]Tokenizing train dataset:  28%|██▊       | 127/450 [00:00<00:01, 192.06 examples/s]Tokenizing train dataset:  33%|███▎      | 150/450 [00:00<00:01, 200.78 examples/s]Tokenizing train dataset:  40%|████      | 180/450 [00:00<00:01, 193.86 examples/s]Tokenizing train dataset:  44%|████▍     | 200/450 [00:01<00:01, 191.12 examples/s]Tokenizing train dataset:  49%|████▉     | 220/450 [00:01<00:01, 189.33 examples/s]Tokenizing train dataset:  56%|█████▌    | 250/450 [00:01<00:01, 185.15 examples/s]Tokenizing train dataset:  62%|██████▏   | 279/450 [00:01<00:00, 182.81 examples/s]Tokenizing train dataset:  67%|██████▋   | 300/450 [00:01<00:00, 183.90 examples/s]Tokenizing train dataset:  71%|███████   | 320/450 [00:01<00:00, 183.20 examples/s]Tokenizing train dataset:  75%|███████▌  | 339/450 [00:01<00:00, 184.59 examples/s]Tokenizing train dataset:  80%|████████  | 360/450 [00:01<00:00, 186.13 examples/s]Tokenizing train dataset:  85%|████████▍ | 381/450 [00:02<00:00, 189.17 examples/s]Tokenizing train dataset:  91%|█████████ | 408/450 [00:02<00:00, 182.39 examples/s]Tokenizing train dataset:  95%|█████████▍| 427/450 [00:02<00:00, 181.87 examples/s]Tokenizing train dataset:  99%|█████████▉| 446/450 [00:02<00:00, 179.04 examples/s]Tokenizing train dataset: 100%|██████████| 450/450 [00:02<00:00, 184.54 examples/s]
+Extracting prompt in eval dataset:   0%|          | 0/50 [00:00<?, ? examples/s]Extracting prompt in eval dataset: 100%|██████████| 50/50 [00:00<00:00, 2172.22 examples/s]
+Applying chat template to eval dataset:   0%|          | 0/50 [00:00<?, ? examples/s]Applying chat template to eval dataset: 100%|██████████| 50/50 [00:00<00:00, 1085.68 examples/s]
+Tokenizing eval dataset:   0%|          | 0/50 [00:00<?, ? examples/s]Tokenizing eval dataset:  40%|████      | 20/50 [00:00<00:00, 185.19 examples/s]Tokenizing eval dataset:  90%|█████████ | 45/50 [00:00<00:00, 166.65 examples/s]Tokenizing eval dataset: 100%|██████████| 50/50 [00:00<00:00, 169.93 examples/s]
+The model is already on multiple devices. Skipping the move to device specified in `args`.
+Training started!
+
+The tokenizer has new PAD/BOS/EOS tokens that differ from the model config and generation config. The model config and generation config were aligned accordingly, being updated with the tokenizer's values. Updated tokens: {'bos_token_id': None, 'pad_token_id': 151643}.
+  0%|          | 0/57 [00:00<?, ?it/s]/usr/local/lib/python3.13/dist-packages/torch/utils/checkpoint.py:232: UserWarning: None of the inputs have requires_grad=True. Gradients will be None
+  check_backward_validity(args)
+Crash bundle written: 
+/content/drive/MyDrive/soup-takehome/repo/.soup-crashes/crash_20260929T031549Z_5
+74e76ec.crash
+Attach this file when reporting the failure.
+
+Error: RuntimeError: Tensor on device cuda:0 is not on the expected device meta!
+Run with --verbose for the full traceback.
+
+╭─────────────────────────────── Full Traceback ───────────────────────────────╮
+│ Traceback (most recent call last):                                           │
+│   File "/usr/local/lib/python3.13/dist-packages/soup_cli/cli.py", line 810,  │
+│ in run                                                                       │
+│     app()                                                                    │
+│     ~~~^^                                                                    │
+│   File "/usr/local/lib/python3.13/dist-packages/typer/main.py", line 335, in │
+│ __call__                                                                     │
+│     raise e                                                                  │
+│   File "/usr/local/lib/python3.13/dist-packages/typer/main.py", line 318, in │
+│ __call__                                                                     │
+│     return get_command(self)(*args, **kwargs)                                │
+│            ~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^                                │
+│   File "/usr/local/lib/python3.13/dist-packages/click/core.py", line 1631,   │
+│ in __call__                                                                  │
+│     return self.main(*args, **kwargs)                                        │
+│            ~~~~~~~~~^^^^^^^^^^^^^^^^^                                        │
+│   File "/usr/local/lib/python3.13/dist-packages/typer/core.py", line 807, in │
+│ main                                                                         │
+│     return _main(                                                            │
+│         self,                                                                │
+│     ...<6 lines>...                                                          │
+│         **extra,                                                             │
+│     )                                                                        │
+│   File "/usr/local/lib/python3.13/dist-packages/typer/core.py", line 193, in │
+│ _main                                                                        │
+│     rv = self.invoke(ctx)                                                    │
+│   File "/usr/local/lib/python3.13/dist-packages/click/core.py", line 2032,   │
+│ in invoke                                                                    │
+│     return _process_result(sub_ctx.command.invoke(sub_ctx))                  │
+│                            ~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^                   │
+│   File "/usr/local/lib/python3.13/dist-packages/click/core.py", line 1415,   │
+│ in invoke                                                                    │
+│     return ctx.invoke(self.callback, **ctx.params)                           │
+│            ~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^                           │
+│   File "/usr/local/lib/python3.13/dist-packages/click/core.py", line 910, in │
+│ invoke                                                                       │
+│     return callback(*args, **kwargs)                                         │
+│   File "/usr/local/lib/python3.13/dist-packages/typer/main.py", line 705, in │
+│ wrapper                                                                      │
+│     return callback(**use_params)                                            │
+│   File "/usr/local/lib/python3.13/dist-packages/soup_cli/commands/train.py", │
+│ line 1473, in train                                                          │
+│     result = trainer_wrapper.train(                                          │
+│         display=display, tracker=tracker, run_id=run_id,                     │
+│         resume_from_checkpoint=resume_from,                                  │
+│     )                                                                        │
+│   File "/usr/local/lib/python3.13/dist-packages/soup_cli/trainer/dpo.py",    │
+│ line 339, in train                                                           │
+│     self.trainer.train(resume_from_checkpoint=resume_from_checkpoint)        │
+│     ~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^        │
+│   File "/usr/local/lib/python3.13/dist-packages/transformers/trainer.py",    │
+│ line 2325, in train                                                          │
+│     return inner_training_loop(                                              │
+│         args=args,                                                           │
+│     ...<2 lines>...                                                          │
+│         ignore_keys_for_eval=ignore_keys_for_eval,                           │
+│     )                                                                        │
+│   File "/usr/local/lib/python3.13/dist-packages/transformers/trainer.py",    │
+│ line 2674, in _inner_training_loop                                           │
+│     tr_loss_step = self.training_step(model, inputs, num_items_in_batch)     │
+│   File "/usr/local/lib/python3.13/dist-packages/transformers/trainer.py",    │
+│ line 4071, in training_step                                                  │
+│     self.accelerator.backward(loss, **kwargs)                                │
+│     ~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^                                │
+│   File "/usr/local/lib/python3.13/dist-packages/accelerate/accelerator.py",  │
+│ line 2850, in backward                                                       │
+│     loss.backward(**kwargs)                                                  │
+│     ~~~~~~~~~~~~~^^^^^^^^^^                                                  │
+│   File "/usr/local/lib/python3.13/dist-packages/torch/_tensor.py", line 631, │
+│ in backward                                                                  │
+│     torch.autograd.backward(                                                 │
+│     ~~~~~~~~~~~~~~~~~~~~~~~^                                                 │
+│         self, gradient, retain_graph, create_graph, inputs=inputs            │
+│         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^            │
+│     )                                                                        │
+│     ^                                                                        │
+│   File "/usr/local/lib/python3.13/dist-packages/torch/autograd/__init__.py", │
+│ line 381, in backward                                                        │
+│     _engine_run_backward(                                                    │
+│     ~~~~~~~~~~~~~~~~~~~~^                                                    │
+│         tensors,                                                             │
+│         ^^^^^^^^                                                             │
+│     ...<5 lines>...                                                          │
+│         accumulate_grad=True,                                                │
+│         ^^^^^^^^^^^^^^^^^^^^^                                                │
+│     )                                                                        │
+│     ^                                                                        │
+│   File "/usr/local/lib/python3.13/dist-packages/torch/autograd/graph.py",    │
+│ line 869, in _engine_run_backward                                            │
+│     return Variable._execution_engine.run_backward(  # Calls into the C++    │
+│ engine to run the backward pass                                              │
+│            ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^ │
+│ ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^                                                │
+│         t_outputs, *args, **kwargs                                           │
+│         ^^^^^^^^^^^^^^^^^^^^^^^^^^                                           │
+│     )  # Calls into the C++ engine to run the backward pass                  │
+│     ^                                                                        │
+│   File "/usr/local/lib/python3.13/dist-packages/torch/autograd/function.py", │
+│ line 317, in apply                                                           │
+│     return user_fn(self, *args)                                              │
+│   File "/usr/local/lib/python3.13/dist-packages/torch/utils/checkpoint.py",  │
+│ line 308, in backward                                                        │
+│     outputs = ctx.run_function(*detached_inputs)                             │
+│   File "/usr/local/lib/python3.13/dist-packages/torch/nn/modules/module.py", │
+│ line 1779, in _wrapped_call_impl                                             │
+│     return self._call_impl(*args, **kwargs)                                  │
+│            ~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^                                  │
+│   File "/usr/local/lib/python3.13/dist-packages/torch/nn/modules/module.py", │
+│ line 1790, in _call_impl                                                     │
+│     return forward_call(*args, **kwargs)                                     │
+│   File                                                                       │
+│ "/usr/local/lib/python3.13/dist-packages/transformers/utils/deprecation.py", │
+│ line 172, in wrapped_func                                                    │
+│     return func(*args, **kwargs)                                             │
+│   File                                                                       │
+│ "/usr/local/lib/python3.13/dist-packages/transformers/models/qwen2/modeling_ │
+│ qwen2.py", line 232, in forward                                              │
+│     hidden_states = self.input_layernorm(hidden_states)                      │
+│   File "/usr/local/lib/python3.13/dist-packages/torch/nn/modules/module.py", │
+│ line 1779, in _wrapped_call_impl                                             │
+│     return self._call_impl(*args, **kwargs)                                  │
+│            ~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^                                  │
+│   File "/usr/local/lib/python3.13/dist-packages/torch/nn/modules/module.py", │
+│ line 1790, in _call_impl                                                     │
+│     return forward_call(*args, **kwargs)                                     │
+│   File                                                                       │
+│ "/usr/local/lib/python3.13/dist-packages/transformers/models/qwen2/modeling_ │
+│ qwen2.py", line 201, in forward                                              │
+│     return self.weight * hidden_states.to(input_dtype)                       │
+│            ~~~~~~~~~~~~^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~                       │
+│   File                                                                       │
+│ "/usr/local/lib/python3.13/dist-packages/torch/_prims_common/wrappers.py",   │
+│ line 314, in _fn                                                             │
+│     result = fn(*args, **kwargs)                                             │
+│   File "/usr/local/lib/python3.13/dist-packages/torch/_compile.py", line 54, │
+│ in inner                                                                     │
+│     return disable_fn(*args, **kwargs)                                       │
+│   File                                                                       │
+│ "/usr/local/lib/python3.13/dist-packages/torch/_dynamo/eval_frame.py", line  │
+│ 1263, in _fn                                                                 │
+│     return fn(*args, **kwargs)                                               │
+│   File                                                                       │
+│ "/usr/local/lib/python3.13/dist-packages/torch/_prims_common/wrappers.py",   │
+│ line 152, in _fn                                                             │
+│     result = fn(**bound.arguments)                                           │
+│   File "/usr/local/lib/python3.13/dist-packages/torch/_refs/__init__.py",    │
+│ line 1171, in _ref                                                           │
+│     output = prim(a, b)                                                      │
+│   File "/usr/local/lib/python3.13/dist-packages/torch/_refs/__init__.py",    │
+│ line 1790, in mul                                                            │
+│     return prims.mul(a, b)                                                   │
+│            ~~~~~~~~~^^^^^^                                                   │
+│   File "/usr/local/lib/python3.13/dist-packages/torch/_ops.py", line 865, in │
+│ __call__                                                                     │
+│     return self._op(*args, **kwargs)                                         │
+│            ~~~~~~~~^^^^^^^^^^^^^^^^^                                         │
+│   File                                                                       │
+│ "/usr/local/lib/python3.13/dist-packages/torch/_library/fake_impl.py", line  │
+│ 111, in meta_kernel                                                          │
+│     return fake_impl_holder.kernel(*args, **kwargs)                          │
+│            ~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^                          │
+│   File "/usr/local/lib/python3.13/dist-packages/torch/_library/utils.py",    │
+│ line 23, in __call__                                                         │
+│     return self.func(*args, **kwargs)                                        │
+│            ~~~~~~~~~^^^^^^^^^^^^^^^^^                                        │
+│   File "/usr/local/lib/python3.13/dist-packages/torch/library.py", line      │
+│ 1496, in inner                                                               │
+│     return func(*args, **kwargs)                                             │
+│   File                                                                       │
+│ "/usr/local/lib/python3.13/dist-packages/torch/_library/custom_ops.py", line │
+│ 636, in fake_impl                                                            │
+│     return self._abstract_fn(*args, **kwargs)                                │
+│            ~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^                                │
+│   File "/usr/local/lib/python3.13/dist-packages/torch/_prims/__init__.py",   │
+│ line 420, in _prim_elementwise_meta                                          │
+│     utils.check_same_device(*args_, allow_cpu_scalar_tensors=True)           │
+│     ~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^           │
+│   File                                                                       │
+│ "/usr/local/lib/python3.13/dist-packages/torch/_prims_common/__init__.py",   │
+│ line 917, in check_same_device                                               │
+│     raise RuntimeError(msg)                                                  │
+│ RuntimeError: Tensor on device cuda:0 is not on the expected device meta!    │
+│                                                                              │
+╰──────────────────────────────────────────────────────────────────────────────╯
+  0%|          | 0/57 [00:06<?, ?it/s]
+2026-09-29T03:15:52Z

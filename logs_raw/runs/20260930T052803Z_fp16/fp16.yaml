@@ -1,0 +1,31 @@
+# Comparison: auto_mixed_precision (fp16 on T4) vs as-shipped bf16. 1 epoch.
+base: Qwen/Qwen2.5-1.5B-Instruct
+task: dpo
+backend: transformers
+modality: text
+
+data:
+  train: ./data/train_small.jsonl   # 80 rows -> 72 train -> 9 steps (Soup has no max_steps)
+  format: dpo
+  max_length: 1024        # Soup sets max_prompt_length = 512
+  val_split: 0.1          # Soup default: 450 train / 50 val taken silently from train
+
+training:
+  epochs: 1
+  lr: 2.0e-5              # Soup default
+  batch_size: 2
+  gradient_accumulation_steps: 4
+  dpo_beta: 0.1
+  quantization: none
+  lora:
+    r: 16
+    alpha: 32
+    dropout: 0.05
+    target_modules: [q_proj, v_proj]   # == "auto" for qwen2, written out
+  stream_layers: true
+  stream_buffers: 2
+  logging_steps: 1
+  save_steps: 25
+  auto_mixed_precision: true   # picks fp16 on T4 (cc 7.5) instead of forced bf16
+
+output: ./runs/fp16

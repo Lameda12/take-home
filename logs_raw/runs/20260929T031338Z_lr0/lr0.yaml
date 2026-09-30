@@ -1,0 +1,30 @@
+# Control: lr≈0 (ADR 0001 amendment). 1 epoch.
+base: Qwen/Qwen2.5-1.5B-Instruct
+task: dpo
+backend: transformers
+modality: text
+
+data:
+  train: ./data/train.jsonl
+  format: dpo
+  max_length: 1024        # Soup sets max_prompt_length = 512
+  val_split: 0.1          # Soup default: 450 train / 50 val taken silently from train
+
+training:
+  epochs: 1
+  lr: 1.0e-10             # Soup forbids lr=0 (gt=0); see ADR 0001 amendment
+  batch_size: 2
+  gradient_accumulation_steps: 4
+  dpo_beta: 0.1
+  quantization: none
+  lora:
+    r: 16
+    alpha: 32
+    dropout: 0.05
+    target_modules: [q_proj, v_proj]   # == "auto" for qwen2, written out
+  stream_layers: true
+  stream_buffers: 2
+  logging_steps: 1
+  save_steps: 25
+
+output: ./runs/lr0

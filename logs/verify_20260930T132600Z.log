@@ -1,0 +1,4 @@
+  [adapters/main] A: all 56 lora_B tensors non-zero, max norm 0.0188
+  [adapters/main] B: all 112 tensors loaded; max logit diff 0.251
+The following generation flags are not valid and may be ignored: ['temperature', 'top_p', 'top_k']. Set `TRANSFORMERS_VERBOSITY=info` for more details.
+The attention mask is not set and cannot be inferred from input because pad token is same as eos token. As a consequence, you may observe unexpected behavior. Please pass your input's `attention_mask` to obtain reliable results.

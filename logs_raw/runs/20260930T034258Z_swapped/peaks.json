@@ -1,0 +1,12 @@
+{
+  "run": "20260930T034258Z_swapped",
+  "steps_logged": 57,
+  "window_utc": [
+    "2026-09-30T03:44:55.995811Z",
+    "2026-09-30T05:05:35.263646Z"
+  ],
+  "sec_per_step": 86.42,
+  "torch_max_allocated_gb": 8.559,
+  "torch_max_reserved_gb": 15.07,
+  "nvidia_smi_peak_mib": 14539
+}
